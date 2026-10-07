@@ -1,0 +1,3 @@
+ "use client";
+import {useEffect,useState} from "react"; import {createClient} from "@/lib/supabase-browser";
+export default function Account(){const [user,setUser]=useState(null);const supabase=createClient();useEffect(()=>{supabase.auth.getUser().then(({data})=>setUser(data.user));},[]);async function logout(){await supabase.auth.signOut();location.href="/";}return <div className="shell pagePad"><p className="eyebrow">ACCOUNT</p><h1>My account</h1>{user?<><div className="panel"><b>{user.email}</b><p>Manage your account and orders.</p><a className="btn" href="/orders">My orders</a> <button className="btn secondaryBtn" onClick={logout}>Logout</button></div></>:<div className="panel"><p>Please login to continue.</p><a className="btn" href="/auth">Login</a></div>}</div>}

@@ -1,0 +1,3 @@
+ "use client";
+import {useEffect,useState} from "react"; import {createClient} from "@/lib/supabase-browser";
+export default function Header(){const [email,setEmail]=useState(null);useEffect(()=>{createClient().auth.getUser().then(({data})=>setEmail(data.user?.email||null));},[]);return <header className="header shell"><button className="mobileMenu">☰</button><a className="logo" href="/">HOCO</a><nav><a href="/">Home</a><a href="/?category=Mobile">Mobile</a><a href="/?category=Laptop">Laptop</a><a href="/?category=Audio">Audio</a><a href="/?category=Power">Power</a></nav><div className="actions"><a href="/auth">♙ {email?"" : "Login"}</a><a href="/cart">Bag (0)</a></div></header>}
